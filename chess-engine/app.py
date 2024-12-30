@@ -7,7 +7,7 @@ from stockfish import Stockfish
 
 app = Flask(__name__)
 CORS(app, origins=['your-frontend-url.vercel.app'])
-stockfish = Stockfish(path="stockfish")
+stockfish = Stockfish(path="/usr/games/stockfish")
 stockfish.set_depth(8)  # Reduced depth for faster moves
 stockfish.set_skill_level(10)
 stockfish.get_parameters()["Threads"] = 4  # Use multiple CPU threads
