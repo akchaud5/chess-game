@@ -6,8 +6,15 @@ import time
 from stockfish import Stockfish
 
 app = Flask(__name__)
-CORS(app, origins=['your-frontend-url.vercel.app'])
-stockfish = Stockfish(path="/usr/games/stockfish")
+CORS(app, resources={
+    r"/get-move": {
+        "origins": "http://localhost:3000",
+        "methods": ["POST", "OPTIONS"],
+        "allow_headers": ["Content-Type"]
+    }
+})
+
+stockfish = Stockfish(path="/opt/homebrew/bin/stockfish")
 stockfish.set_depth(8)  # Reduced depth for faster moves
 stockfish.set_skill_level(10)
 stockfish.get_parameters()["Threads"] = 4  # Use multiple CPU threads
